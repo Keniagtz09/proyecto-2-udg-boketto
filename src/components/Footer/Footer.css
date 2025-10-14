@@ -1,0 +1,52 @@
+/* =======================================
+   Archivo: src/components/Footer/Footer.css
+   ======================================= */
+
+.main-footer {
+    /* Fondo con el color primario de Boketto Design */
+    background-color: var(--color-primary, #080e23);
+    color: #f4f4f4; /* Texto claro */
+    padding: 40px 20px;
+    font-family: Calibri, sans-serif;
+    margin-top: 50px; /* Separación del contenido principal */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section {
+    width: 25%;
+    margin: 0 15px;
+}
+
+.footer-section h4 {
+    color: white;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #5a74a8; /* Línea de división sutil */
+    padding-bottom: 5px;
+}
+
+.footer-section p, .footer-section a {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.footer-section a {
+    color: #cccccc;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.footer-section a:hover {
+    color: white;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
