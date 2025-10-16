@@ -1,7 +1,3 @@
-// =======================================
-// Archivo: src/components/Footer/Footer.js
-// Pie de página de Boketto Design
-// =======================================
 import React from 'react';
 import './Footer.css'; 
 

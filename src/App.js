@@ -1,21 +1,18 @@
-// =======================================
-// Archivo: src/App.js
 // Integración de los componentes principales (H013 y Footer)
-// =======================================
+
 import React from 'react';
 // Importa el componente de la cabecera
 import Header from './components/Header.js'; 
 // Importa el componente del pie de página
 import Footer from './components/Footer/Footer.js'; 
-// Puedes eliminar o vaciar './App.css' si no lo necesitas, 
-// o dejarlo si contiene estilos globales importantes.
+
 
 const App = () => {
     return (
-        // El contenedor principal de toda tu aplicación
+        // El contenedor principal 
         <div className="app-container">
             
-            {/* 1. CABECERA Y MENÚ (Tarea H013) */}
+            {/* 1. CABECERA Y MENÚ ( H013) */}
             <Header /> 
             
             {/* 2. CONTENIDO PRINCIPAL (Donde irán el catálogo y la tienda) */}

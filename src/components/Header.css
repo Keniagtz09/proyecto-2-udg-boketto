@@ -1,9 +1,3 @@
-/* =======================================
-   Archivo: src/components/Header/Header.css
-   APLICACIÓN DE ESTILOS DE BOKETTO DESIGN
-   ======================================= */
-
-/* --- Colores y fuentes base --- */
 /* Las variables se definen aquí */
 :root {
   --color-primary: #0F245E; /* Tu color principal: azul oscuro */
@@ -11,20 +5,19 @@
   font-family: Calibri, sans-serif;
 }
 
-/* El body asegura que la fuente se aplique a toda la página */
+
 body {
     font-family: Calibri, sans-serif;
     margin: 0;
 }
 
-/* --- BARRA SUPERIOR (top-bar) --- */
+
 .top-bar {
     display: flex;
     /* Distribuye los elementos: Logo a la izquierda, Buscador al centro, Botones a la derecha */
     justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
-    /* Línea sutil de separación */
     border-bottom: 1px solid #eee;
     background-color: var(--color-background);
 }
@@ -38,13 +31,13 @@ body {
     font-weight: bold;
 }
 
-/* Se asume que el logo-icon tiene un tamaño definido (ejemplo) */
+/* logo-icon tiene un tamaño definido (ejemplo) */
 .logo-icon {
     /* Mantiene el tamaño pequeño y definido */
     width: 300px; 
     height: auto; 
     margin-right: 50px;
-    /* Las líneas de alineación ya están cubiertas por el 'display: flex' del padre */
+    /* Las líneas de alineación ya están cubiertas por el 'display: flex'*/
 }
 
 /* Buscador (search-section) */
@@ -105,7 +98,7 @@ body {
     border-bottom: 2px solid var(--color-primary);
 }
 
-/* --- SECCIÓN HERO (hero-section) --- */
+/* --- SECCIÓN HERO --- */
 .hero-image {
     width: 100%;
     /* Obliga a la imagen a no ser más alta de lo necesario */
