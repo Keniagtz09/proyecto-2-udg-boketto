@@ -1,32 +1,40 @@
-// Integración de los componentes principales (H013 y Footer)
-
 import React from 'react';
-// Importa el componente de la cabecera
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+// fijos dentro de la app
 import Header from './components/Header.js'; 
-// Importa el componente del pie de página
-import Footer from './components/Footer/Footer.js'; 
+import SubMenu from './components/SubMenu.js'; 
+import Footer from './components/Footer.js'; 
+
+
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import GenericPage from './pages/GenericPage'; // Para rutas de categoría
 
 
 const App = () => {
     return (
-        // El contenedor principal 
-        <div className="app-container">
+        <Router>
             
-            {/* 1. CABECERA Y MENÚ ( H013) */}
-            <Header /> 
+            <Header />      {/* Encabezado Fijo */}
+            <SubMenu />     {/* Submenú Fijo */}
             
-            {/* 2. CONTENIDO PRINCIPAL (Donde irán el catálogo y la tienda) */}
-            <main>
-                <h1 style={{textAlign: 'center', margin: '50px'}}>
-                    Contenido Principal de la Tienda
-                </h1>
-                {/* Aquí se integrarán las demás Historias de Usuario (Catálogo, Filtros, etc.) */}
+            <main style={{ minHeight: '120vh', padding: '40px' }}>
+                <Routes>
+                    {/* Ruta 1: URL base (/) */}
+                    <Route path="/" element={<HomePage />} />
+                    
+                    {/* Ruta 2: URL de Login/Registro */}
+                    <Route path="/iniciar-sesion" element={<LoginPage />} />
+                    
+                    {/* Ruta 3: Rutas de Categoría (ej: /muebles, /blog, /ofertas) */}
+                    <Route path="/:categorySlug" element={<GenericPage />} /> 
+                </Routes>
             </main>
             
-            {/* 3. PIE DE PÁGINA */}
-            <Footer /> 
+            <Footer />      {/* Pie de Página Fijo */}
             
-        </div>
+        </Router>
     );
 }
 
