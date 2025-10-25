@@ -41,7 +41,7 @@ const MOCK_GALLERY_IMAGES = [
     { id: 1, src: '/images/products/ariel_submenu.jpg', alt: 'Proyecto Ariel' },
     { id: 2, src: '/images/products/muraoka_submenu.jpg', alt: 'Muraoka Design' },
     { id: 3, src: '/images/products/rilke_submenu.jpg', alt: 'Rilke Production' },
-    { id: 4, src: '/images/products/tiro_al_blanco_submenu.jpg', alt: 'Galería tiro al Blanco' },
+    { id: 4, src: '/images/products/tiro al blanco_submenu.jpg', alt: 'Galería tiro al Blanco' },
     { id: 5, src: '/images/products/makoto_submenu.jpg', alt: 'Proyecto Makoto' },
     { id: 6, src: '/images/products/proyecto12_submenu.jpg', alt: 'Proyecto 12' },
 ];
