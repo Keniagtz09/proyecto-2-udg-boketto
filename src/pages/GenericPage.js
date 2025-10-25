@@ -1,57 +1,76 @@
-// es la plantilla de todas las páginas a las que se accede a través del submenú, llama a los otros acrhivos del submenu
-import React from 'react';
+import React, { useState } from 'react'; // para el filtro
 import { useParams } from 'react-router-dom';
 import ProductCard from '../components/ProductCard'; 
 import CategoryGrid from '../components/CategoryGrid';
 
 
-// datos estátics
+// los datos que son estáticos
 const primaryColor = '#0F245E';
 
-// 1. Productos para la vista de Ofertas, info que se vera en pantalla
+// 1. Productos para la vista de Ofertas
 const MOCK_OFFERS_PRODUCTS = [
-    { "id": 104, "nombre": "Silla de Varier Ergonomic", "precio": 4000.00, "categoria": "Ofertas", "imagen_principal": "/images/products/oferta_1.webp" },
-    { "id": 105, "nombre": "Mesa Modul Sakura", "precio": 7000.00, "categoria": "Ofertas", "imagen_principal": "/images/products/oferta_3.jpg" },
-    { "id": 106, "nombre": "Set Rincón para estudio", "precio": 3500.00, "categoria": "Ofertas", "imagen_principal": "/images/products/oferta_4.jpg" },
-    { "id": 107, "nombre": "Lámpara colgante LED para módulo", "precio": 2000.00, "categoria": "Ofertas", "imagen_principal": "/images/products/oferta_2.jpg" },
-];
+    { "id": 104, "nombre": "Silla de Varier Ergonomic", "precio": 4000.00, "categoria": "Ofertas", "imagen_principal": "/images/products/oferta_1.webp" },
+    { "id": 105, "nombre": "Mesa Modul Sakura", "precio": 7000.00, "categoria": "Ofertas", "imagen_principal": "/images/products/oferta_3.jpg" },
+    { "id": 106, "nombre": "Set Rincón para estudio", "precio": 3500.00, "categoria": "Ofertas", "imagen_principal": "/images/products/oferta_4.jpg" },
+    { "id": 107, "nombre": "Lámpara colgante LED para módulo", "precio": 2000.00, "categoria": "Ofertas", "imagen_principal": "/images/products/oferta_2.jpg" },
+    { "id": 108, "nombre": "Estación para escritorio", "precio": 3550.00, "categoria": "Ofertas", "imagen_principal": "/images/products/estacion_submenu.jpg" },
+    { "id": 109, "nombre": "Monitor control de salas", "precio": 4125.00, "categoria": "Ofertas", "imagen_principal": "/images/products/reserva_submenu.jpg" },
+]; 
 
-// 2. Subcategorías para Muebles, Sillas y Materiales, ojo cambia slug 20 oct
+// 2. Subcategorías para Muebles, Sillas y Materiales
 const SUBCATEGORIES_MUEBLES = [
-    { name: 'Modulares y escritorios', slug: 'mesas', img: '/images/products/muebles_submenu.webp' },
-    { name: 'Archiveros y estantes', slug: 'salas-sofas', img: '/images/products/archiveros_submenu.jpg' },
-    { name: 'Sillones y recepción', slug: 'sillones', img: '/images/products/recepcion_submenu.png' },
+    { name: 'Modulares y escritorios', slug: 'mesas', img: '/images/products/muebles_submenu.webp' },
+    { name: 'Archiveros y estantes', slug: 'archiveros', img: '/images/products/archiveros_submenu.jpg' },
+    { name: 'Sillones y recepción', slug: 'recepcion', img: '/images/products/recepcion_submenu.png' },
 ];
 
 const SUBCATEGORIES_SILLAS = [
-    { name: 'Sillas ergonómicas', slug: 'comedor', img: '/images/products/sillas_submenu.jpg' },
-    { name: 'Sillas de Varier', slug: 'oficina', img: '/images/products/varier_submenu.webp' },
-    { name: 'Bancos y Taburetes', slug: 'bancos', img: '/images/products/bancos_submenu.jpg' },
+    { name: 'Sillas ergonómicas', slug: 'ergonomicas', img: '/images/products/sillas_submenu.jpg' },
+    { name: 'Sillas de Varier', slug: 'varier', img: '/images/products/varier_submenu.webp' },
+    { name: 'Bancos y Taburetes', slug: 'bancos', img: '/images/products/bancos_submenu.jpg' },
 ];
 
 const SUBCATEGORIES_MATERIALES = [
-    { name: 'Madera y Texturas', slug: 'madera', img: '/images/products/madera_submenu.jpeg' },
-    { name: 'Metales y Acabados', slug: 'metales', img: '/images/products/acabados_submenu.webp' },
-    { name: 'Textiles', slug: 'telas', img: '/images/products/textiles_submenu.jpg' },
+    { name: 'Madera y Texturas', slug: 'madera', img: '/images/products/madera_submenu.jpeg' },
+    { name: 'Metales y Acabados', slug: 'metales', img: '/images/products/acabados_submenu.webp' },
+    { name: 'Textiles', slug: 'textiles', img: '/images/products/textiles_submenu.jpg' },
 ];
 
 // 3. Imágenes para la Galería
 const MOCK_GALLERY_IMAGES = [
-    { id: 1, src: '/images/products/ariel_submenu.jpg', alt: 'Proyecto Ariel' },
-    { id: 2, src: '/images/products/muraoka_submenu.jpg', alt: 'Muraoka Design' },
-    { id: 3, src: '/images/products/rilke_submenu.jpg', alt: 'Rilke Production' },
-    { id: 4, src: '/images/products/tiro al blanco_submenu.jpg', alt: 'Galería tiro al Blanco' },
-    { id: 5, src: '/images/products/makoto_submenu.jpg', alt: 'Proyecto Makoto' },
-    { id: 6, src: '/images/products/proyecto12_submenu.jpg', alt: 'Proyecto 12' },
+    { id: 1, src: '/images/products/ariel_submenu.jpg', alt: 'Proyecto Ariel' },
+    { id: 2, src: '/images/products/muraoka_submenu.jpg', alt: 'Muraoka Design' },
+    { id: 3, src: '/images/products/rilke_submenu.jpg', alt: 'Rilke Production' },
+    { id: 4, src: '/images/products/tiro_al_blanco_submenu.jpg', alt: 'Galería tiro al Blanco' },
+    { id: 5, src: '/images/products/makoto_submenu.jpg', alt: 'Proyecto Makoto' },
+    { id: 6, src: '/images/products/proyecto12_submenu.jpg', alt: 'Proyecto 12' },
 ];
+
+
 
 
 const GenericPage = () => {
     const { categorySlug } = useParams(); 
     const slug = categorySlug ? categorySlug.toLowerCase() : '';
+    
+    // funciones para el filtro
+    const [sortOption, setSortOption] = useState('default'); 
+
+    // ordenar visualmente en pantalla
+    const getSortedProducts = (products) => {
+        const sorted = [...products]; 
+        
+        if (sortOption === 'price_asc') {
+            sorted.sort((a, b) => a.precio - b.precio);
+        } else if (sortOption === 'price_desc') {
+            sorted.sort((a, b) => b.precio - a.precio);
+        }
+        
+        return sorted;
+    };
+
 
     
-    // las vistas de Muebles, Sillas, Materiales
     if (slug === 'muebles' || slug === 'sillas' || slug === 'materiales') {
         let title, subcategoriesData;
 
@@ -73,17 +92,47 @@ const GenericPage = () => {
                     viewAllLink={`/${slug}/ver-todo`} 
                     subcategories={subcategoriesData} 
                 />
+                {/* rejilla de muebles */}
+                {slug === 'muebles' && (
+                    <div style={{ marginTop: '40px' }}>
+                         <CategoryGrid 
+                            title="Nuestros Archiveros" 
+                            viewAllLink={`/archiveros/ver-todo`} 
+                            subcategories={SUBCATEGORIES_MUEBLES.slice(1, 3)} 
+                        />
+                    </div>
+                )}
             </div>
         );
     }
     
-    // Vista de ofertas grid
+    // 2. Vista de Ofertas
     if (slug === 'ofertas') {
+        
+        // se aplica el filtro 
+        const displayedProducts = getSortedProducts(MOCK_OFFERS_PRODUCTS);
+
         return (
             <div style={{ padding: '20px' }}>
-                <h1 style={{ textAlign: 'center', color: primaryColor, marginBottom: '40px' }}>
+                <h1 style={{ textAlign: 'center', color: primaryColor, marginBottom: '20px' }}>
                     OFERTAS ESPECIALES
                 </h1>
+                
+                {/* ordena  */}
+                <div style={{ display: 'flex', justifyContent: 'flex-end', maxWidth: '1300px', margin: '0 auto 20px' }}>
+                    <label style={{ marginRight: '10px', color: primaryColor }}>Ordenar por:</label>
+                    <select 
+                        value={sortOption} 
+                        onChange={(e) => setSortOption(e.target.value)} // Actualiza el estado al cambiar
+                        style={{ padding: '5px', border: '1px solid #ccc' }}
+                    >
+                        <option value="default">Recomendados</option>
+                        <option value="price_asc">Precio: Más bajo primero</option>
+                        <option value="price_desc">Precio: Más alto primero</option>
+                    </select>
+                </div>
+                {/* al terminar no repite */}
+
                 <div style={{ 
                     display: 'grid', 
                     gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
@@ -91,7 +140,8 @@ const GenericPage = () => {
                     maxWidth: '1300px', 
                     margin: '0 auto' 
                 }}>
-                    {MOCK_OFFERS_PRODUCTS.map(product => (
+                    {/* renderiza  */}
+                    {displayedProducts.map(product => (
                         <ProductCard key={product.id} product={product} />
                     ))}
                 </div>
@@ -99,7 +149,7 @@ const GenericPage = () => {
         );
     }
     
-    // Vista de galería (ejemplo solo con 6 imágenes)
+    // 3. Vista de Galería 
     if (slug === 'galeria') {
         return (
             <div style={{ padding: '40px' }}>
@@ -127,21 +177,18 @@ const GenericPage = () => {
         );
     }
 
-    // 4. Vista de Blog
-if (slug === 'blog') {
-        const primaryColor = '#0F245E'; 
-
+    // 4. Vista de Blog 
+    if (slug === 'blog') {
         return (
             <div style={{ padding: '40px', maxWidth: '800px', margin: '0 auto' }}>
                 <h1 style={{ color: primaryColor, borderBottom: `2px solid ${primaryColor}`, paddingBottom: '10px' }}>
                     Diseñar para el bienestar: cómo los espacios de oficina influyen en la calidad de vida laboral
                 </h1>
-                
                 <article style={{ marginTop: '30px', lineHeight: 1.6 }}>
                     <h2 style={{ color: '#333' }}>Tendencias 2025: El Regreso de los Materiales Naturales</h2>
                     <p style={{ color: '#666', fontSize: '0.9em' }}>20 de octubre de 2025</p>
                     
-                    {/* IMAGEN 1: Banner principal del artículo */}
+                    {/* img 1 */}
                     <img
                         src="/images/oficina_natural_1.webp" 
                         alt="Oficina moderna con iluminación natural"
@@ -154,8 +201,7 @@ if (slug === 'blog') {
                     <p>Los diseños ergonómicos son un pilar fundamental. Incorporar mobiliario que se adapte a las necesidades físicas del trabajador —sillas ajustables, escritorios a la altura adecuada, iluminación natural y una buena ventilación— reduce las dolencias musculares y mejora la concentración. No se trata solo de estética, sino de salud.
                     </p>
                     
-                    {/* IMAGEN 2: Imagen para romper el texto */}
-                    
+                    {/* img rompe texto */}
                     <img
                         src="/images/oficina_natural_2.jpg" 
                         alt="Diseño de silla ergonómica de oficina"
@@ -175,13 +221,13 @@ if (slug === 'blog') {
         );
     }
 
-    // 5. fallback para que regrese al contenido, si no hay arroja el mensaje
+    // 5. Fallback, para páginas que no están terminadas
     return (
-        <div style={{ textAlign: 'center', padding: '50px' }}>
-            <h1 style={{ color: primaryColor }}>Sección no implementada: {categorySlug.toUpperCase()}</h1>
-            <p>El contenido visual para esta sección aún no ha sido definido.</p>
-        </div>
-    );
+        <div style={{ textAlign: 'center', padding: '50px' }}>
+            <h1 style={{ color: primaryColor }}>Sección no implementada: {categorySlug.toUpperCase()}</h1>
+            <p>El contenido visual para esta sección aún no ha sido definido.</p>
+        </div>
+    );
 };
 
 export default GenericPage;
