@@ -18,7 +18,7 @@ const HomePage = () => {
 
             {/* Lo más vendido */}
             <h2 style={{ textAlign: 'center', marginTop: '80px', color: '#0F245E' }}>
-                Lo Más Vendido
+                Nueva colección 2025
             </h2>
             <FeaturedProducts /> 
         </div>
